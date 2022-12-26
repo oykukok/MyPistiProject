@@ -10,9 +10,9 @@ public class ProjectConstants {
     public static final int PISTISCORE = 10;
     public static final String THREESCORE = "♦10";
     public static final String TWOSCORE = "♣2";
-    public static final String BEFORESHUFFLETEXT = "Kartların karıştırılmadan önceki hali: ";
-    public static final String AFTERSHUFFLETEXT = "Kartların karıştırıldıktan sonraki hali: ";
-    public static final String AFTERCUTTEXT = "Kartların kesildikten sonraki hali: ";
-    public static final String PLAYCARDTEXT = "Oynamak istediğiniz kartın numarasını yazınız: ";
-    public static final String REMAININGCARDTEXT = "Kalan kartlarınız: ";
+    public static final String BEFORESHUFFLETEXT = "Before the cards are shuffled: ";
+    public static final String AFTERSHUFFLETEXT = "After the cards are shuffled: ";
+    public static final String AFTERCUTTEXT = "The state of the cards after they are cut: ";
+    public static final String PLAYCARDTEXT = "Type the number of the card you want to play: ";
+    public static final String REMAININGCARDTEXT = "Your remaining cards: ";
 }
