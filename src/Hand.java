@@ -88,5 +88,51 @@ public class Hand {
     }
 
 
+    /*
+      This method deletes all the cards of the hand.
+     */
+    public void clear() {
+        cards = new String[0];
+    }
+
+
+
+
+
+    /*
+      This method determines whether the hand is empty.
+      return true if empty hand, not false
+     */
+    public boolean isEmpty() {
+        return cards.length == 0;
+    }
+
+
+
+    /*
+      This method returns the score.
+      return score
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /*
+      This method increases the score by the given point.
+      parameter score The score to be used to increase the score
+     */
+    public void setScore(int score) {
+        this.score += score;
+    }
+
+    /*
+      This method increases the number of cards by the number of cards given.
+      parameter numberOfCards number of cards to use to increase the number of cards
+     */
+    public void setNumberOfCards(int numberOfCards) {
+        this.numberOfCards += numberOfCards;
+    }
+
+
 
 }

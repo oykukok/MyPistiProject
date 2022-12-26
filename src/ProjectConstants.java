@@ -13,4 +13,6 @@ public class ProjectConstants {
     public static final String BEFORESHUFFLETEXT = "Kartların karıştırılmadan önceki hali: ";
     public static final String AFTERSHUFFLETEXT = "Kartların karıştırıldıktan sonraki hali: ";
     public static final String AFTERCUTTEXT = "Kartların kesildikten sonraki hali: ";
+    public static final String PLAYCARDTEXT = "Oynamak istediğiniz kartın numarasını yazınız: ";
+    public static final String REMAININGCARDTEXT = "Kalan kartlarınız: ";
 }

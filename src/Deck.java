@@ -47,6 +47,22 @@ public class Deck {
             default -> String.valueOf(rank);
         };
     }
+    /*
+      Draws and rotates the last card.
+      This method pulls the last element of the cards array
+      and returns. If the array of cards is empty, it returns null.
+     */
+    public String draw() {
+        // If the array of cards is empty
+        if (cards.length == 0) {
+            return null; // returns null value
+        }
+        String card = cards[cards.length - 1]; // Gets the last element of the cards array.
+        // Removes the last element of the cards array (copies and reduces the array's height by 1)
+        cards = Arrays.copyOf(cards, cards.length - 1);
+        // Returns the first drawn card.
+        return card;
+    }
     public void shuffle() {
         // Shows the cards before they were shuffled
         System.out.println(ProjectConstants.BEFORESHUFFLETEXT);
