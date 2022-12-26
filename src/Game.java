@@ -18,10 +18,10 @@ public class Game {
     }
 
     public void startGame() {
-        for (int round = ProjectConstants.ONE; round <= ProjectConstants.SIX; round++) {
+        for (int round = 1; round <= 6; round++) {
             System.out.println("------- ROUND " + round + " -------");
             // we will deal 4 cards for each round.
-            for (int dealCard = ProjectConstants.ZERO; dealCard < ProjectConstants.FOUR; dealCard++) {
+            for (int dealCard = 0; dealCard < 4; dealCard++) {
                 // if the player is the dealer, we deal cards to the first computer.
                 if (isPlayerDealer) {
                     computer.addCard(deck.draw());
@@ -34,9 +34,9 @@ public class Game {
                 }
             }
             // if it's the first round, we show the top card on the floor.
-            if (round == ProjectConstants.ONE) {
+            if (round == 1) {
                 // We put 4 cards on the floor, show the 4th card.
-                for (int dealCard = ProjectConstants.ZERO; dealCard < ProjectConstants.FOUR; dealCard++) {
+                for (int dealCard = 0; dealCard < 4; dealCard++) {
                     floor.addCard(deck.draw());
                 }
                 // we show the top card.
@@ -48,7 +48,7 @@ public class Game {
             System.out.println(ProjectConstants.REMAININGCARDTEXT + Arrays.toString(player.getCards()));
 
             // then our game starts. This will continue until the cards we have are finished.
-            for (int turn = ProjectConstants.ZERO; turn < ProjectConstants.FOUR; turn++) {
+            for (int turn = 0; turn < 4; turn++) {
                 // if the player is the dealer, the first computer deals cards.
                 if (isPlayerDealer) {
                     play(false);

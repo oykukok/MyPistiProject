@@ -19,16 +19,16 @@ public class Leaderboard {
       parameter score to add score
      */
     public void addScore(String score) {
-        if (scores[scores.length - ProjectConstants.ONE] != null) {
+        if (scores[scores.length - 1] != null) {
             // If the last element of the array is full,
-            int newScore = Integer.parseInt(score.split(":")[ProjectConstants.ONE]
+            int newScore = Integer.parseInt(score.split(":")[1]
                     .trim());
             int lowestScore = Integer.parseInt(scores[scores.length
-                    - ProjectConstants.ONE].split(":")[ProjectConstants.ONE]
+                    - 1].split(":")[1]
                     .trim());
             if (newScore > lowestScore) {
                 // If the new score is greater than the lowest score, it replaces the lowest score.
-                scores[scores.length - ProjectConstants.ONE] = score;
+                scores[scores.length - 1] = score;
             }
             else {
                 // If the last element of the array is empty,

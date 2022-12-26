@@ -14,7 +14,7 @@ public class Deck {
         cards = new String[ProjectConstants.DECKSIZE];
         int index = 0;
         // Initializes the array to hold the cards and the index of the array
-        for (int i = ProjectConstants.ONE; i <= ProjectConstants.CARDSIZE; i++) {
+        for (int i = 1; i <= ProjectConstants.CARDSIZE; i++) {
             // generates a number between 1 and 13
             String rank = getRank(i);
             // Creates a card value based on the value of this number

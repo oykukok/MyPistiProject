@@ -19,9 +19,9 @@ public class Hand {
      */
     public void addCard(String card) {
         // creates a new array with increasing the length of the cards array by 1
-        cards = Arrays.copyOf(cards, cards.length + ProjectConstants.ONE);
+        cards = Arrays.copyOf(cards, cards.length + 1);
         // assigns the given card to the last element of the created array
-        cards[cards.length - ProjectConstants.ONE] = card;
+        cards[cards.length - 1] = card;
     }
 
     /*
@@ -31,20 +31,20 @@ public class Hand {
      */
     public String removeCard(int index) {
         // returns null if index value is less than 0 or greater than the length of cards array
-        if (index < ProjectConstants.ZERO || index >= cards.length) {
+        if (index < 0 || index >= cards.length) {
             return null;
         }
 
         // assigns the element in the given index of the cards array to the variable card
         String card = cards[index];
         // creates an array 1 less than the length of the cards array
-        String[] newCards = new String[cards.length - ProjectConstants.ONE];
+        String[] newCards = new String[cards.length - 1];
         // copies the part of the cards array up to the given index into the newCards array
-        System.arraycopy(cards, ProjectConstants.ZERO, newCards,
-                ProjectConstants.ZERO, index);
+        System.arraycopy(cards, 0, newCards,
+                0, index);
         // Copies the remainder of the given index of the cards array from the next element to the newCards array
-        System.arraycopy(cards, index + ProjectConstants.ONE,
-                newCards, index, cards.length - index - ProjectConstants.ONE);
+        System.arraycopy(cards, index + 1,
+                newCards, index, cards.length - index - 1);
         // replaces array cards with array newCards
         cards = newCards;
         // returns the deleted element
@@ -56,7 +56,7 @@ public class Hand {
       return card at the end of the hand, returned null if the hand is empty
      */
     public String getLastCard() {
-        return cards[cards.length - ProjectConstants.ONE];
+        return cards[cards.length - 1];
     }
 
 
