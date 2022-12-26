@@ -26,9 +26,19 @@ public class Leaderboard {
             int lowestScore = Integer.parseInt(scores[scores.length
                     - ProjectConstants.ONE].split(":")[ProjectConstants.ONE]
                     .trim());
-            if (lowestScore > newScore) {
+            if (newScore > lowestScore) {
                 // If the new score is greater than the lowest score, it replaces the lowest score.
                 scores[scores.length - ProjectConstants.ONE] = score;
+            }
+            else {
+                // If the last element of the array is empty,
+                for (int i = 0; i < scores.length; i++) {
+                    if (scores[i] == null) {
+                        // places the score in an empty space
+                        scores[i] = score;
+                        break;
+                    }
+                }
             }
         }
 
