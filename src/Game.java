@@ -7,14 +7,12 @@ public class Game {
     Hand computer;
     Hand floor;
     Deck deck;
-    boolean isPlayerDealer;
 
-    public Game(Hand player, Hand computer, Hand floor, Deck deck, boolean isPlayerDealer) {
+    public Game(Hand player, Hand computer, Hand floor, Deck deck) {
         this.player = player;
         this.computer = computer;
         this.floor = floor;
         this.deck = deck;
-        this.isPlayerDealer = isPlayerDealer;
     }
 
     public void startGame() {
@@ -22,16 +20,8 @@ public class Game {
             System.out.println("------- ROUND " + round + " -------");
             // we will deal 4 cards for each round.
             for (int dealCard = 0; dealCard < 4; dealCard++) {
-                // if the player is the dealer, we deal cards to the first computer.
-                if (isPlayerDealer) {
-                    computer.addCard(deck.draw());
-                    // then we give ourselves cards.
-                    player.addCard(deck.draw());
-                    // if the computer is the dealer, we give a card to the first player.
-                } else {
-                    player.addCard(deck.draw());
-                    computer.addCard(deck.draw());
-                }
+                computer.addCard(deck.draw());
+                player.addCard(deck.draw());
             }
             // if it's the first round, we show the top card on the floor.
             if (round == 1) {
@@ -40,26 +30,16 @@ public class Game {
                     floor.addCard(deck.draw());
                 }
                 // we show the top card.
-                if (!isPlayerDealer) {
-                    System.out.println("Top card: " + floor.getLastCard());
-                }
+                System.out.println("Top card: " + floor.getLastCard());
             }
             // then we show the player's cards.
-            System.out.println(ProjectConstants.REMAININGCARDTEXT + Arrays.toString(player.getCards()));
+            System.out.println("Your remaining cards: " + Arrays.toString(player.getCards()));
 
             // then our game starts. This will continue until the cards we have are finished.
             for (int turn = 0; turn < 4; turn++) {
-                // if the player is the dealer, the first computer deals cards.
-                if (isPlayerDealer) {
-                    play(false);
-                    play(true);
-                    // if the computer is the dealer, the first player deals.
-                } else {
-                    play(true);
-                    play(false);
-                }
-                System.out.println(ProjectConstants.REMAININGCARDTEXT + Arrays.toString(player.getCards()));
-
+                play(false);
+                play(true);
+                System.out.println("Your remaining cards: " + Arrays.toString(player.getCards()));
             }
         }
     }
@@ -82,12 +62,12 @@ public class Game {
             if (!player.isEmpty()) {
                 final Scanner getScanner = new Scanner(System.in);
 
-                System.out.print(ProjectConstants.PLAYCARDTEXT);
+                System.out.print("Type the number of the card you want to play: ");
                 int choosedNumber = (getScanner.nextInt());
 
                 while (player.getCardCount() < choosedNumber || 1 > choosedNumber) {
                     System.out.println("Please enter a number between 1 and " + player.getCardCount() + ".");
-                    System.out.print(ProjectConstants.PLAYCARDTEXT);
+                    System.out.print("Type the number of the card you want to play: ");
                     choosedNumber = (getScanner.nextInt());
                 }
                 gameStatus(player.removeCard(choosedNumber - 1), player);
@@ -120,15 +100,15 @@ public class Game {
             if (floor.getLastCard().substring(1).equals(card.substring(1))) {
                 player.setNumberOfCards(floor.getCardCount() + 1);
                 if (floor.getCardCount() == 1) {
-                    player.setScore(ProjectConstants.PISTISCORE);
+                    player.setScore(10);
                 } else {
                     player.setScore(calculateScore(floor.getCards()) + cardScore(card));
                 }
-                floor.clear();
+                floor.clearHand();
             } else if (card.substring(1).equals("Jack")) {
                 player.setScore(calculateScore(floor.getCards()) + cardScore(card));
                 player.setNumberOfCards(floor.getCardCount() + 1);
-                floor.clear();
+                floor.clearHand();
             } else {
                 floor.addCard(card);
             }
@@ -136,15 +116,15 @@ public class Game {
         if (deck.isEmpty() && player.isEmpty() && computer.isEmpty()) {
             player.setScore(calculateScore(floor.getCards()));
             player.setNumberOfCards(floor.getCardCount());
-            floor.clear();
+            floor.clearHand();
         }
     }
 
     private int cardScore(String card) {
         return switch (card) {
-            case ProjectConstants.THREESCORE -> ProjectConstants.THREE;
-            case ProjectConstants.TWOSCORE -> ProjectConstants.TWO;
-            default -> ProjectConstants.ONE;
+            case "♦10" -> 3;
+            case "♣2" -> 2;
+            default -> 1;
         };
     }
 
@@ -168,9 +148,9 @@ public class Game {
      */
     public int results() {
         if (player.getNumberOfCards() > computer.getNumberOfCards()) {
-            player.setScore(ProjectConstants.THREE);
+            player.setScore(3);
         } else {
-            computer.setScore(ProjectConstants.THREE);
+            computer.setScore(3);
         }
 
         System.out.println("Game over. Scores: ");

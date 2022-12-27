@@ -11,10 +11,10 @@ public class Deck {
       Represents King emoticons for 13.
      */
     public Deck() {
-        cards = new String[ProjectConstants.DECKSIZE];
+        cards = new String[52];
         int index = 0;
         // Initializes the array to hold the cards and the index of the array
-        for (int i = 1; i <= ProjectConstants.CARDSIZE; i++) {
+        for (int i = 1; i <= 13; i++) {
             // generates a number between 1 and 13
             String rank = getRank(i);
             // Creates a card value based on the value of this number
@@ -34,9 +34,8 @@ public class Deck {
       method returns "Ace". If the value is 11, 12 or 13, the method is "Jack",
       Returns "Queen" or "King". For all other values, the method value
       returns as a string.
-
-      Value of @param rank card
-      @return card value as a string
+      Value of parameter rank card
+      return card value as a string
      */
     private static String getRank(int rank) {
         return switch (rank) {
@@ -65,7 +64,7 @@ public class Deck {
     }
     public void shuffle() {
         // Shows the cards before they were shuffled
-        System.out.println(ProjectConstants.BEFORESHUFFLETEXT);
+        System.out.println("Before the cards are shuffled: ");
         System.out.println(Arrays.toString(cards));
 
         // A rand object is created to generate a random number
@@ -73,15 +72,15 @@ public class Deck {
         // Loops the length of the array of cards
         for (int i = 0; i < cards.length; i++) {
             // generate a random number
-            int j = rand.nextInt(cards.length);
+            int a = rand.nextInt(cards.length);
             // A temporary variable is assigned the value of the card
             String temp = cards[i];
             // Replaces the card with a random number
-            cards[i] = cards[j];
-            cards[j] = temp;
+            cards[i] = cards[a];
+            cards[a] = temp;
         }
         // Shows the state of the cards after they were shuffled
-        System.out.println(ProjectConstants.AFTERSHUFFLETEXT);
+        System.out.println("After the cards are shuffled: ");
         System.out.println(Arrays.toString(cards));
     }
     /*
@@ -94,7 +93,7 @@ public class Deck {
        the method does nothing.
      */
 
-    public void cut(int index) {
+    public void cutAndReverse(int index) {
         // If the given index is invalid, it terminates the execution of the method.
         if (index < 0 || index >= cards.length) {
             return;
@@ -108,7 +107,7 @@ public class Deck {
         // Updates the cards array by combining the bottom and top arrays
         cards = concatenateArrays(bottom, top);
 
-        System.out.println(ProjectConstants.AFTERCUTTEXT);
+        System.out.println("The state of the cards after they are cut: ");
         System.out.println(Arrays.toString(cards));
     }
     /*

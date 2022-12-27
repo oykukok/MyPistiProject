@@ -91,7 +91,7 @@ public class Hand {
     /*
       This method deletes all the cards of the hand.
      */
-    public void clear() {
+    public void clearHand() {
         cards = new String[0];
     }
 

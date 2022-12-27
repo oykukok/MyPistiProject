@@ -1,5 +1,4 @@
 import java.util.Objects;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -8,23 +7,23 @@ public class Main {
         boolean isPlaying = true;
         Leaderboard leaderboard = new Leaderboard();
         while (isPlaying) {
-            System.out.println(ProjectConstants.STARTGAMETEXT);
+            System.out.println("Welcome to Pişti, the game begins!");
 
             String playerName = playerName();
 
-            boolean isPlayerDealer = tossCoin();
+
 
             Deck deck = new Deck();
             deck.shuffle();
 
-            int cutNumber = getNumber(isPlayerDealer);
-            deck.cut(cutNumber);
+            int cutNumber = getNumber();
+            deck.cutAndReverse(cutNumber);
 
             Hand player = new Hand();
             Hand computer = new Hand();
             Hand floor = new Hand();
 
-            Game game = new Game(player, computer, floor, deck, isPlayerDealer);
+            Game game = new Game(player, computer, floor, deck);
 
             game.startGame();
 
@@ -38,34 +37,7 @@ public class Main {
         }
     }
 
-    /*
-      Tosses a coin and sees if the user's input matches the result
-      Returns a boolean value indicating .
 
-      This method takes input "Y" (tails) or "T" (heads) from the user and
-      then tosses a virtual coin using a random number generator.
-      If the coin falls on the text (0) and the user enters "Y" or the coin
-      If heads landed (1) and the user entered "T", the method returns true.
-      Otherwise, it returns false.
-      return  true if the user's input is the result of a coin toss
-    matches ,  false otherwise
-     */
-    public static boolean tossCoin() {
-        Scanner scanner = new Scanner(System.in);
-        Random random = new Random();
-
-        System.out.println(ProjectConstants.HEADSTAILSTEXT);
-        String input = scanner.nextLine();
-
-        // generates a random number between 0 or 1
-        // If coin is 0 and user entered "H" or coin is 1
-        // and returns true if the user entered "T"
-        int coin = random.nextInt(ProjectConstants.TWO);
-
-        if (coin == ProjectConstants.ZERO && input.equalsIgnoreCase("H")) {
-            return true;
-        } else return coin == ProjectConstants.ONE && input.equalsIgnoreCase("T");
-    }
 
     /*
       Prompts the user to enter a name and returns what he entered.
@@ -90,23 +62,17 @@ public class Main {
       indicates whether to enter
       return An integer from 1 to 52
      */
-    public static int getNumber(boolean inputFromUser) {
-        if (inputFromUser) {
+    public static int getNumber() {
+
             Scanner scanner = new Scanner(System.in);
-            System.out.println(ProjectConstants.CUTNUMBERTEXT);
+            System.out.println("Enter a number between 1 and 52 to cut the cards: ");
             int number = scanner.nextInt();
-            if (number < ProjectConstants.ONE || number > ProjectConstants.DECKSIZE) {
-                System.out.println(ProjectConstants.ERRORGETNUMBERTEXT);
-                return getNumber(inputFromUser);
+            if (number < 1 || number > 52) {
+                System.out.println("You have entered an invalid value, please enter a value between 1 and 52: ");
+                return getNumber();
             }
             return number;
-        } else {
-            Random random = new Random();
-            int randomNumber = random.nextInt(ProjectConstants.DECKSIZE) + ProjectConstants.ONE;
-            System.out.println(ProjectConstants.COMPUTERCUTTEXT);
-            System.out.println(randomNumber);
-            return randomNumber;
-        }
+
     }
 
     /*
@@ -116,25 +82,24 @@ public class Main {
       repeats this process until it responds.
       If the user inputs "Yes", the method returns true.
       If the user inputs "No", the method returns false.
-
       return  true if the user wants to restart the game,
       If it is false
      */
     private static boolean restartGame() {
-        System.out.println(ProjectConstants.STARTAGAINTEXT);
+        System.out.println("Type 'yes' if you want to replay the game, 'no' if you don't want to: ");
 
         final Scanner restartGame = new Scanner(System.in);
         // Reads the user's input and assigns it to the answer variable
         String answer = restartGame.nextLine();
 
         // Loops if answer variable is not "Yes" or "No"
-        while (!Objects.equals(answer, ProjectConstants.YESTEXT)
-                && !Objects.equals(answer, ProjectConstants.NOTEXT)) {
-            System.out.println(ProjectConstants.STARTAGAINTEXT);
+        while (!Objects.equals(answer, "yes")
+                && !Objects.equals(answer, "no")) {
+            System.out.println("Type 'yes' if you want to replay the game, 'no' if you don't want to: ");
             answer = (restartGame.nextLine());
         }
 
         // Returns true if answer variable is "Yes", false otherwise
-        return Objects.equals(answer, ProjectConstants.YESTEXT);
+        return Objects.equals(answer, "yes");
     }
 }

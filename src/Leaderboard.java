@@ -1,6 +1,4 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class Leaderboard {
     // The array I created to keep the top 10 scores.
@@ -65,21 +63,21 @@ public class Leaderboard {
      */
     public void sortScores() {
         // Indexes to use to parse username and score
-        final int SCORE_INDEX = 1;
+        final int index = 1;
 
         // We use an algorithm to sort the scores
         for (int i = 0; i < scores.length - 1; i++) {
-            for (int j = 0; j < scores.length - i - 1; j++) {
+            for (int a = 0; a < scores.length - i - 1; a++) {
                 // We convert the string values of the scores to integer
-                int score1 = Integer.parseInt(scores[j].split(":")[SCORE_INDEX].trim());
-                int score2 = Integer.parseInt(scores[j + 1].split(":")[SCORE_INDEX].trim());
+                int score1 = Integer.parseInt(scores[a].split(":")[index].trim());
+                int score2 = Integer.parseInt(scores[a + 1].split(":")[index].trim());
 
                 // We compare scores
                 if (score2 > score1) {
                     // We change the scores
-                    String temp = scores[j];
-                    scores[j] = scores[j + 1];
-                    scores[j + 1] = temp;
+                    String temp = scores[a];
+                    scores[a] = scores[a + 1];
+                    scores[a + 1] = temp;
                 }
             }
         }
@@ -109,5 +107,14 @@ public class Leaderboard {
             e.printStackTrace();
         }
     }
+   /* public String showScores(File file) throws Exception{
+        try {
+            FileReader reader = new FileReader("scoresOfPlayers.txt");
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+
+    }*/
 
 }
