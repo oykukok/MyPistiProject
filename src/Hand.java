@@ -56,6 +56,9 @@ public class Hand {
       return card at the end of the hand, returned null if the hand is empty
      */
     public String getLastCard() {
+        if (cards.length == 0) {
+            return null;
+        }
         return cards[cards.length - 1];
     }
 

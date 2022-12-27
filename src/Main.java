@@ -8,6 +8,7 @@ public class Main {
         Leaderboard leaderboard = new Leaderboard();
         while (isPlaying) {
             System.out.println("Welcome to Pişti, the game begins!");
+            HighScore scoreList = new HighScore();
 
             String playerName = playerName();
 
@@ -31,14 +32,14 @@ public class Main {
             int score = game.results();
 
             leaderboard.addScore(playerName + ":" + score);
-            leaderboard.writeScoresToFile();
+
+
+            leaderboard.showScores();
+            scoreList.scoreList(score,playerName);
 
             isPlaying = restartGame();
         }
     }
-
-
-
     /*
       Prompts the user to enter a name and returns what he entered.
       return User entered name
@@ -50,6 +51,9 @@ public class Main {
         // returns the name of the player
         return scanner.nextLine();
     }
+
+
+
 
     /*
       Returns an integer between 1 and 52.
@@ -70,7 +74,8 @@ public class Main {
             if (number < 1 || number > 52) {
                 System.out.println("You have entered an invalid value, please enter a value between 1 and 52: ");
                 return getNumber();
-            }
+        }
+
             return number;
 
     }
@@ -93,8 +98,7 @@ public class Main {
         String answer = restartGame.nextLine();
 
         // Loops if answer variable is not "Yes" or "No"
-        while (!Objects.equals(answer, "yes")
-                && !Objects.equals(answer, "no")) {
+        while (!Objects.equals(answer, "yes") && !Objects.equals(answer, "no")) {
             System.out.println("Type 'yes' if you want to replay the game, 'no' if you don't want to: ");
             answer = (restartGame.nextLine());
         }

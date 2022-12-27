@@ -37,11 +37,18 @@ public class Game {
 
             // then our game starts. This will continue until the cards we have are finished.
             for (int turn = 0; turn < 4; turn++) {
-                play(false);
                 play(true);
+                play(false);
                 System.out.println("Your remaining cards: " + Arrays.toString(player.getCards()));
+                cheat();
             }
+
         }
+    }
+    private void cheat() {
+        // eğer oyuncu hile açtıysa, bilgisayarın elindeki kartları gösteriyoruz.
+        System.out.println("Bilgisayarın elindeki kartlar: " + Arrays.toString(computer.getCards()));
+
     }
 
     private int search(String[] array, String targetValue) {

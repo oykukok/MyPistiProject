@@ -17,18 +17,19 @@ public class Leaderboard {
       parameter score to add score
      */
     public void addScore(String score) {
-        if (scores[scores.length - 1] != null) {
-            // If the last element of the array is full,
-            int newScore = Integer.parseInt(score.split(":")[1]
-                    .trim());
-            int lowestScore = Integer.parseInt(scores[scores.length
-                    - 1].split(":")[1]
-                    .trim());
-            if (newScore > lowestScore) {
-                // If the new score is greater than the lowest score, it replaces the lowest score.
-                scores[scores.length - 1] = score;
-            }
-            else {
+
+            if (scores[scores.length - 1] != null) {
+                // If the last element of the array is full,
+                int newScore = Integer.parseInt(score.split(":")[1]
+                        .trim());
+                int lowestScore = Integer.parseInt(scores[scores.length
+                        - 1].split(":")[1]
+                        .trim());
+                if (newScore > lowestScore) {
+                    // If the new score is greater than the lowest score, it replaces the lowest score.
+                    scores[scores.length - 1] = score;
+                }
+            } else {
                 // If the last element of the array is empty,
                 for (int i = 0; i < scores.length; i++) {
                     if (scores[i] == null) {
@@ -38,7 +39,9 @@ public class Leaderboard {
                     }
                 }
             }
-        }
+
+
+
 
         boolean isEmpty = false;
 
@@ -63,14 +66,12 @@ public class Leaderboard {
      */
     public void sortScores() {
         // Indexes to use to parse username and score
-        final int index = 1;
-
         // We use an algorithm to sort the scores
         for (int i = 0; i < scores.length - 1; i++) {
             for (int a = 0; a < scores.length - i - 1; a++) {
                 // We convert the string values of the scores to integer
-                int score1 = Integer.parseInt(scores[a].split(":")[index].trim());
-                int score2 = Integer.parseInt(scores[a + 1].split(":")[index].trim());
+                int score1 = Integer.parseInt(scores[a].split(":")[1].trim());
+                int score2 = Integer.parseInt(scores[a + 1].split(":")[1].trim());
 
                 // We compare scores
                 if (score2 > score1) {
@@ -82,39 +83,21 @@ public class Leaderboard {
             }
         }
     }
+    // This is not finished yet
+    public void showScores() {
 
-    /*
-      Writes scores to scores.txt file.
-      This method returns the scores in the scores array to be displayed on the screen.
-      Writes to "scores.txt" file. If the file could not be created or
-      If an error occurred while writing , the error message is printed on the screen.
-
-     */
-    public void writeScoresToFile() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("scores.txt"))) {
-            // Opens a BufferedWriter to write to the scores.txt file
-            for (String score : scores) {
-                if (score != null) {
-                    // If the score is not null,
-                    writer.write(score);
-                    // Writes the score to the file
-                    writer.newLine();
-                    // goes to the bottom line of the file
+            try {
+                BufferedReader bufferedReader = new BufferedReader(new FileReader("scores.txt"));
+                String line;
+                while ((line = bufferedReader.readLine()) != null){
+                    System.out.println(line);
                 }
+
+            } catch (IOException e ){
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            // If an error occurs while opening the file, print the error
-            e.printStackTrace();
-        }
+
+
     }
-   /* public String showScores(File file) throws Exception{
-        try {
-            FileReader reader = new FileReader("scoresOfPlayers.txt");
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-
-
-    }*/
 
 }
