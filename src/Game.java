@@ -46,9 +46,7 @@ public class Game {
         }
     }
     private void cheat() {
-        // eğer oyuncu hile açtıysa, bilgisayarın elindeki kartları gösteriyoruz.
-        System.out.println("Bilgisayarın elindeki kartlar: " + Arrays.toString(computer.getCards()));
-
+        System.out.println("Computers remaining cards: " + Arrays.toString(computer.getCards()));
     }
 
     private int search(String[] array, String targetValue) {
@@ -128,11 +126,19 @@ public class Game {
     }
 
     private int cardScore(String card) {
-        return switch (card) {
-            case "♦10" -> 3;
-            case "♣2" -> 2;
-            default -> 1;
-        };
+        int score = 0;
+        switch (card){
+            case "♦10":
+                score =3;
+                break;
+            case "♣2":
+                score =2;
+                break;
+            default:
+                score =1;
+                break;
+        }
+        return score;
     }
 
     private int calculateScore(String[] cards) {

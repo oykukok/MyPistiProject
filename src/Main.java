@@ -5,7 +5,7 @@ public class Main {
     public static void main(String[] args) {
 
         boolean isPlaying = true;
-        Leaderboard leaderboard = new Leaderboard();
+
         while (isPlaying) {
             System.out.println("Welcome to Pişti, the game begins!");
             HighScore scoreList = new HighScore();
@@ -31,10 +31,10 @@ public class Main {
 
             int score = game.results();
 
-            leaderboard.addScore(playerName + ":" + score);
 
 
-            leaderboard.showScores();
+
+
             scoreList.scoreList(score,playerName);
 
             isPlaying = restartGame();

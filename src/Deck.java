@@ -38,13 +38,25 @@ public class Deck {
       return card value as a string
      */
     private static String getRank(int rank) {
-        return switch (rank) {
-            case 1 -> "Ace";
-            case 11 -> "Jack";
-            case 12 -> "Queen";
-            case 13 -> "King";
-            default -> String.valueOf(rank);
-        };
+        String temp = null;
+        switch (rank){
+            case 1:
+                temp="Ace";
+                break;
+            case 11:
+                temp ="Jack";
+                break;
+            case 12:
+                temp="Queen";
+                break;
+            case 13:
+                temp ="King";
+                break;
+            default:
+                temp =String.valueOf(rank);
+                break;
+        }
+        return temp;
     }
     /*
       Draws and rotates the last card.
